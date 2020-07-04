@@ -1,3 +1,0 @@
-DFSG
-SDF
-sgr
