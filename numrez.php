@@ -1,213 +1,196 @@
-
-<?php 
+<?php
 session_start();  ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-		<meta charset="utf-8">
-		<title> Kursach </title>
-		<link rel="stylesheet" href="css/main.css">
+	<meta charset="utf-8">
+	<title> Kursach </title>
+	<link rel="stylesheet" href="css/main.css">
 
 </head>
 
 <body id="portfolio">
-	
+
 
 	<header>
 		<div class="container">
 			<div class="heading clearfix">
-			<a href="index.php">  <img src="img/logo.png" alt="Golden" style="
+				<a href="index.php"> <img src="img/logo.png" alt="Golden" style="
     margin-top: 12px;
 "></a>
-			<nav class="men">
-				<ul class="menu">
-					<li>
-						<?php
-						if(strcasecmp($_SESSION["user"], "student") == 0 )
-						{
-						 echo "<a href=\"vakans.php\">Вакансии</a>";
-						}
-						if(strcasecmp($_SESSION["user"], "jobgiver") == 0 )
-						{
-						 echo "<a href=\"resumes.php\">Резюме</a>";
-						}
-						?>
-					</li>
-					<li>
-						<?php
-						if(strcasecmp($_SESSION["user"], "student") == 0 )
-						{
-						 echo "<a href=\"myreqstd.php\">Мои заявки</a>";
-						}
-						if(strcasecmp($_SESSION["user"], "jobgiver") == 0 )
-						{
-						 echo "<a href=\"myreq.php\">Заявки</a>";
-						}
-						?>
-					</li>
-					<li>
-						<?php
-						if(strcasecmp($_SESSION["user"], "student") == 0 )
-						{
-						 echo "<a href=\"myrez.php\">Резюме</a>";
-						}
-						if(strcasecmp($_SESSION["user"], "jobgiver") == 0 )
-						{
-						 echo "<a href=\"vakans.php\">Вакансии</a>";
-						}
-
-						?>
-						
-					</li>
-					<li>
-						<a href="vihod.php"> Выйти</a>
-					</li>
-	
-					<li>
-						<a href="singin.php"> Регистрация</a>
-					</li>
-					
-
-				</ul>
-						
-			</nav>
-						<?php 
-						//	session_start();
-							
-							if(isset($_SESSION["user"]))
-								{
-									
-								//	echo $_SESSION['user'];
-									
-								}
-							else{
-									
-									$server_name = "localhost";
-									$user_name = "root";
-									$password = "";
-									$db_name = "integration system";
-
-
-
-									//тут надо вообще наличие проверить
-									if(isset($_COOKIE['ident']))
-									{
-									$tok = $_COOKIE["ident"];
-									
-									$mysqli = new mysqli($server_name,$user_name,$password,$db_name);
-									
-									$result = $mysqli->prepare("SELECT login FROM users WHERE token = ?"); 
-									$result->bind_param('s', $tok);
-									$result->bind_result($login);
-									$result->execute();
-									
-									$result->fetch(); 
-
-									
-									$_SESSION['user'] = $login;
-									echo $_SESSION['user'];
-
-									}
-									else
-									echo "Вы не вошли";
+				<nav class="men">
+					<ul class="menu">
+						<li>
+							<?php
+							if (strcasecmp($_SESSION["user"], "student") == 0) {
+								echo "<a href=\"vakans.php\">Вакансии</a>";
 							}
-							
-						?>
+							if (strcasecmp($_SESSION["user"], "jobgiver") == 0) {
+								echo "<a href=\"resumes.php\">Резюме</a>";
+							}
+							?>
+						</li>
+						<li>
+							<?php
+							if (strcasecmp($_SESSION["user"], "student") == 0) {
+								echo "<a href=\"myreqstd.php\">Мои заявки</a>";
+							}
+							if (strcasecmp($_SESSION["user"], "jobgiver") == 0) {
+								echo "<a href=\"myreq.php\">Заявки</a>";
+							}
+							?>
+						</li>
+						<li>
+							<?php
+							if (strcasecmp($_SESSION["user"], "student") == 0) {
+								echo "<a href=\"myrez.php\">Резюме</a>";
+							}
+							if (strcasecmp($_SESSION["user"], "jobgiver") == 0) {
+								echo "<a href=\"vakans.php\">Вакансии</a>";
+							}
+
+							?>
+
+						</li>
+						<li>
+							<a href="vihod.php"> Выйти</a>
+						</li>
+
+						<li>
+							<a href="singin.php"> Регистрация</a>
+						</li>
+
+
+					</ul>
+
+				</nav>
+				<?php
+				//	session_start();
+
+				if (isset($_SESSION["user"])) {
+
+					//	echo $_SESSION['user'];
+
+				} else {
+
+					$server_name = "localhost";
+					$user_name = "root";
+					$password = "";
+					$db_name = "integration system";
+
+
+
+					//тут надо вообще наличие проверить
+					if (isset($_COOKIE['ident'])) {
+						$tok = $_COOKIE["ident"];
+
+						$mysqli = new mysqli($server_name, $user_name, $password, $db_name);
+
+						$result = $mysqli->prepare("SELECT login FROM users WHERE token = ?");
+						$result->bind_param('s', $tok);
+						$result->bind_result($login);
+						$result->execute();
+
+						$result->fetch();
+
+
+						$_SESSION['user'] = $login;
+						echo $_SESSION['user'];
+					} else
+						echo "Вы не вошли";
+				}
+
+				?>
 			</div>
 			<div class="title">
 
 
 				<div class="title_first">
-Просмотр резюме
-				 
-				
+					Просмотр резюме
+
+
 				</div>
-			
+
 			</div>
 
-			
-			
+
+
 		</div>
 	</header>
 	<section id="portfolio">
 		<div class="container">
-		
 
 
-<?php
+
+			<?php
 
 
-$server_name = "localhost";
-$user_name = "root";
-$password = "";
-$db_name = "integration system";
-$idstudent = $_GET['id'];;
+			$server_name = "localhost";
+			$user_name = "root";
+			$password = "";
+			$db_name = "integration system";
+			$idstudent = $_GET['id'];;
 
-$mysqli = new mysqli($server_name,$user_name,$password,$db_name);
-$mysqli->query('SET NAMES utf8');
+			$mysqli = new mysqli($server_name, $user_name, $password, $db_name);
+			$mysqli->query('SET NAMES utf8');
 
-//выбрать группу текущего студента
-$result = $mysqli->query("SELECT Group_idgroup FROM students WHERE idStudent = $idstudent"); 
-$rows = $result->fetch_object();
-$idgroup = $rows->Group_idgroup;
-
-
-$result = $mysqli->query("SELECT `students`.`idStudent`,`students`.`fio`,`groupp`.`name` FROM `students`, `groupp` WHERE `students`.`idStudent` = $idstudent and `groupp`.`idgroupp` = $idgroup"); 
+			//выбрать группу текущего студента
+			$result = $mysqli->query("SELECT Group_idgroup FROM students WHERE idStudent = $idstudent");
+			$rows = $result->fetch_object();
+			$idgroup = $rows->Group_idgroup;
 
 
-//
-	
-//
+			$result = $mysqli->query("SELECT `students`.`idStudent`,`students`.`fio`,`groupp`.`name` FROM `students`, `groupp` WHERE `students`.`idStudent` = $idstudent and `groupp`.`idgroupp` = $idgroup");
 
-	while ($rows = $result->fetch_object()) 
-	{ 
 
-echo "<div class=\"title\">
+			//
+
+			//
+
+			while ($rows = $result->fetch_object()) {
+
+				echo "<div class=\"title\">
 				<h2>";
-					
-	echo $rows->fio;
-					
-	echo "</h2><div  >";
 
-		echo "<table id =\"tl\"><tr><th>ID студента</th><th>$rows->idStudent</th></tr>";
-      echo "<tr><th>ФИО</th><th>$rows->fio</th></tr>";
-      echo "<tr><th>Группа</th><th>$rows->name</th></tr>";
-   
+				echo $rows->fio;
 
-    }  
- $idresume; 
-$result = $mysqli->query("SELECT description,idresume FROM resume WHERE Students_idStudent = $idstudent"); 
-	
-//	$result = $mysqli->query("SELECT students.idStudent,students.fio FROM students WHERE students.idStudent = 1967"); 
-	while ($rows = $result->fetch_object()) 
-	{ 
-      echo "<tr><th>Описание</th><th>$rows->description</th></tr>";
-       $idresume = "$rows->idresume";
-    } 
+				echo "</h2><div  >";
 
-      echo '</table>';  
-      echo "<h2>Умения студента</h2>";   
+				echo "<table id =\"tl\"><tr><th>ID студента</th><th>$rows->idStudent</th></tr>";
+				echo "<tr><th>ФИО</th><th>$rows->fio</th></tr>";
+				echo "<tr><th>Группа</th><th>$rows->name</th></tr>";
+			}
+			$idresume;
+			$result = $mysqli->query("SELECT description,idresume FROM resume WHERE Students_idStudent = $idstudent");
 
-$result = $mysqli->query("SELECT `idResume_Demand`, `resume_demand`.`expirience`, `demand`.`discription` FROM `resume_demand`,`demand` WHERE resume_demand.Demand_idDemand = Demand.idDenamd and Resume_idresume = $idresume"); 
-    echo "<table>";
-    while ($rows = $result->fetch_object()) 	
-	{
-	echo "<tr><th>Умение: </th><th>$rows->discription</th><th>Уровень владения (1-5) <br> $rows->expirience</th></tr>";
+			//	$result = $mysqli->query("SELECT students.idStudent,students.fio FROM students WHERE students.idStudent = 1967"); 
+			while ($rows = $result->fetch_object()) {
+				echo "<tr><th>Описание</th><th>$rows->description</th></tr>";
+				$idresume = "$rows->idresume";
+			}
 
-    }
-	echo '</table>';   
-$mysqli->close();
-?>
+			echo '</table>';
+			echo "<h2>Умения студента</h2>";
 
-</div>
+			$result = $mysqli->query("SELECT `idResume_Demand`, `resume_demand`.`expirience`, `demand`.`discription` FROM `resume_demand`,`demand` WHERE resume_demand.Demand_idDemand = Demand.idDenamd and Resume_idresume = $idresume");
+			echo "<table>";
+			while ($rows = $result->fetch_object()) {
+				echo "<tr><th>Умение: </th><th>$rows->discription</th><th>Уровень владения (1-5) <br> $rows->expirience</th></tr>";
+			}
+			echo '</table>';
+			$mysqli->close();
+			?>
 
-			
-				
-				
-			</div>
+		</div>
 
-			
+
+
+
+		</div>
+
+
 
 		</div>
 	</section>
@@ -215,18 +198,19 @@ $mysqli->close();
 		<div class="container">
 			<div class="fot">
 				<p>
-					 8-(954)345-12-34
-				
+					8-(954)345-12-34
+
 				</p>
 				<p>
-				   2017-2018 © ColoroScheme.Ru    
+					2017-2018 © ColoroScheme.Ru
 				</p>
 			</div>
-			
+
 		</div>
 	</footer>
-	
+
 
 
 </body>
+
 </html>

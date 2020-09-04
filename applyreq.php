@@ -13,8 +13,6 @@ $mysqli->query('SET NAMES utf8');
 
 $result = $mysqli->query("UPDATE `request` SET `status_req`= 'одобрена' WHERE idRequest = $id"); 
 
-
-
 $url="myreq.php";
 header("Location:$url");
  ?>

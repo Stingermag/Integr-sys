@@ -17,9 +17,7 @@ session_start();  ?>
 	<header>
 		<div class="container">
 			<div class="heading clearfix">
-			<a href="index.php">  <img src="img/logo.png" alt="Golden" style="
-    margin-top: 12px;
-"></a>
+			<a href="index.php">  <img src="img/logo.png" alt="Golden" style="margin-top: 12px;"></a>
 			<nav class="men">
 				<ul class="menu">
 					<li>
@@ -73,13 +71,9 @@ session_start();  ?>
 						
 			</nav>
 						<?php 
-						//	session_start();
-							
+
 							if(isset($_SESSION["user"]))
 								{
-									
-								//	echo $_SESSION['user'];
-									
 								}
 							else{
 									
@@ -88,9 +82,6 @@ session_start();  ?>
 									$password = "";
 									$db_name = "integration system";
 
-
-
-									//тут надо вообще наличие проверить
 									if(isset($_COOKIE['ident']))
 									{
 									$tok = $_COOKIE["ident"];
@@ -120,7 +111,7 @@ session_start();  ?>
 
 				<div class="title_first">
 
-				Поиск вакансий 
+					Поиск вакансий 
 				
 				</div>
 			
@@ -157,28 +148,6 @@ $idstudent = $_SESSION['stud'];
 $result = $mysqli->query("SELECT idresume FROM resume WHERE Students_idStudent = $idstudent"); 
 $rows = $result->fetch_object();
 $idrez = $rows->idresume;
-/*
-//кол сходств требований
-$result1 = $mysqli->query("SELECT COUNT(*) as Rating
-FROM vacancy_demands,resume_demand
-WHERE vacancy_demands.discription = resume_demand.discription and resume_demand.Resume_idresume = $idrez and vacancy_demands.Vacancy_idVacancy = 7938");
-$rows = $result1->fetch_object();
-$kolsovpadenij = "$rows->Rating";
-echo "$kolsovpadenij";
-
-//кол требований
-$result2 = $mysqli->query("SELECT COUNT(*) as Rating1
-FROM `vacancy_demands`
-WHERE vacancy_demands.Vacancy_idVacancy = 7938");
-$rows = $result2->fetch_object();
-$koldeamands = "$rows->Rating1";
-echo "$koldeamands";
-*/
-
-/*
-
-SELECT idresume, IFNULL(resdisk,vakdisk) AS vakdisk, IFNULL(resex,0) AS resex, idVacancy,vakdisk, vakex FROM (SELECT `resume`.`idresume`, `resume_demand`.`discription` AS resdisk, `resume_demand`.`expirience` AS resex FROM `resume` LEFT JOIN `resume_demand` ON `resume_demand`.`Resume_idresume` = `resume`.`idresume` WHERE `resume`.`idresume` = 4568) AS STUD RIGHT JOIN (SELECT `vacancy`.`idVacancy`, `vacancy_demands`.`discription` AS vakdisk, `vacancy_demands`.`expirience`AS vakex FROM `vacancy` LEFT JOIN `vacancy_demands` ON `vacancy_demands`.`Vacancy_idVacancy` = `vacancy`.`idVacancy` WHERE`vacancy`.`idVacancy` = 7938 ) AS VAK ON STUD.resdisk = VAK.vakdisk
-*/
 
 $result = $mysqli->query("SELECT vacancy.idVacancy,vacancy.description,vacancy.expirience,jobgiver.fio FROM vacancy,jobgiver WHERE vacancy.Jobgiver_idJobgiver = jobgiver.idJobgiver"); 
 	echo '<table id ="tl"><tr><th>id</th><th>Название</th><th>Описание</th><th>работодатель</th><th>Коэффициент</th> <th></th></tr>';
@@ -207,18 +176,6 @@ $result = $mysqli->query("SELECT vacancy.idVacancy,vacancy.description,vacancy.e
 		
     }
         echo '</table>';
-
-
-
-
-
-
-
-
-
-
-
-
 
 $mysqli->close();
 ?>
